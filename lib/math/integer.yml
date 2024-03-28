@@ -1,0 +1,7 @@
+code: integer.tpsk
+import:
+  - prefix: *
+    path: ../base/base.yml
+    all: true
+export:
+  all: true

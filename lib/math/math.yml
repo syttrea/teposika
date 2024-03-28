@@ -1,0 +1,3 @@
+source:
+  - path: integer.yml
+    all: true

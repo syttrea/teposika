@@ -1,0 +1,32 @@
+{!}@I ::= (FuncUnary, a@I; instI("noti" a);)
+{--}I ::= (FuncUnary, a@I; instI("negi" a);)
+
+{==}@B ::= (FuncEqu, a@I b@I; instB("eqi" a b);)
+{!=}@B ::= (FuncEqu, a@I b@I; instB("neqi" a b);)
+{>}@B ::= (FuncEqu, a@I b@I; instB("gi" a b);)
+{<}@B ::= (FuncEqu, a@I b@I; instB("li" a b);)
+{>=}@B ::= (FuncEqu, a@I b@I; instB("gei" a b);)
+{<=}@B ::= (FuncEqu, a@I b@I; instB("lei" a b);)
+
+{&}@I ::= (FuncLogic, a@I b@I; instI("andi" a b);)
+{|}@I ::= (FuncLogic, a@I b@I; instI("ori" a b);)
+{^}@I ::= (FuncLogic, a@I b@I; instI("xori" a b);)
+{<<}@I ::= (FuncLogic, a@I b@I; instI("shli" a b);)
+{>>}@I ::= (FuncLogic, a@I b@I; instI("sari" a b);)
+
+{+}@I ::= (FuncAdd, a@I b@I; instI("addi" a b);)
+{-}@I ::= (FuncAdd, a@I b@I; instI("subi" a b);)
+{*}@I ::= (FuncMul, a@I b@I; instI("muli" a b);)
+{/}@I ::= (FuncMul, a@I b@I; instI("divi" a b);)
+{%}@I ::= (FuncMul, a@I b@I; instI("modi" a b);)
+
+{:}@I ::= (FuncAt, a@'I b@I; instI("ati" a b);)
+{:}@D ::= (FuncAt, a@'D b@I; instD("atd" a b);)
+{:}@B ::= (FuncAt, a@'B b@I; instB("atb" a b);)
+
+{/}@I ::= (FuncMul, a@I b@I; instI("divi" a b).if(b==0).then(raise );)
+
+{at}@I := (array@'I index@I).func{
+  (array: index).if(index < 0 | index >= array).then(raise(baseError::))
+}
+

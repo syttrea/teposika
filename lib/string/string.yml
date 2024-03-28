@@ -1,0 +1,10 @@
+code: string.tpsk
+import:
+  - prefix: *
+    path: ../base/base.yml
+    all: true
+  - prefix: *
+    path: ../math/math.yml
+    all: true
+export:
+  all: true

@@ -1,0 +1,7 @@
+code: def.tpsk
+import:
+  - prefix: *
+    path: *
+    all: true
+export:
+  all: true

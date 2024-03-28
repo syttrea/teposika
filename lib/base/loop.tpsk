@@ -1,0 +1,61 @@
+{+=}@X := (a@A b@A; a.alias()@a.type() <- a + b;)
+
+{for}@A := (start@I end@I index@Y before@'X do@'X after@A;
+  while(
+    before index.getSymbol()@I = start;
+
+    index < end,
+
+    do index.getSymbol()@I += 1;
+
+    after
+  )
+;)
+
+{each}@A := (array@A element@ZT before@'X do@'X after@A;
+  for(0, array.length(), index, before, element = array:index do; after)
+;)
+
+
+{forInc}@A := (start@I end@I func@A) => {
+  condition@'ZT := (index@I result@{func.type().getTypeA()})
+  while(
+    start ();
+    condition => index < end
+    condition => (
+      index + 1
+      result.concat{func.apply(index;)}
+    )
+  ): 1
+}
+
+{map}@A := (array@A func@A) => {
+  forInc(0, array.length(), (index@I) => func.apply(array: index;))
+}
+
+{reduce}@A := (array@A initial@A func@A) => {
+  condition@'ZT := (index@I result@=func)
+  while(
+    (
+      index <- 0
+      result <- initial
+    )
+    condition => index < array.length()
+    condition => (
+      index <- index + 1
+      result <- func.apply(result)
+    )
+  ) -> result
+}
+
+{sign}@'B := (array@A) => {
+  array.map((element@A) => element < 0)
+}
+
+{sum}@I := (array@'I) => {
+  array.reduce(0, (element@I acc@I) => element + acc)
+}
+
+{regionSum}@I (array@'I) => {
+  array.each(0, (element@I acc@I) => {s@I = element + acc, (s s)})
+}

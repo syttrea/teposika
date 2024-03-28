@@ -1,0 +1,29 @@
+
+S@T = 'I
+
+{printI}@X := (value@I base@I;
+  {digit}@S := (x@I; (0x30 ?(x < 10, 0x37) + x);)
+
+  "0" ?(
+    value != 0,
+    while(
+      dividend@I = value.abs()
+      result@S = "";
+
+      dividend != 0;
+
+      dividend@I /= base
+      result@S =<< digit(dividend % base).concat(result);
+
+      result ?(value < 0, "-".concat(result));
+    )
+  )
+;)
+
+{toS}@S := (a@I; printI(a 10);)
+# {toS}@S := (a@D; printD(a 10 "10:6");)
+{toS}@S := (a@B; "true" ?(!a "false");)
+
+
+
+

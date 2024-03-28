@@ -1,0 +1,77 @@
+# Built-in Type:
+#   Z/symbol: 0
+#   T/type: 1
+#   X/expression: 2
+#   A/any: 3
+#   I/integer: 4
+#   D/double precision float: 5
+#   B/bool: 6
+#   R/raw binary: 7
+#   O/world: 8
+#
+# Built-in Function:
+#   def<X>(symbol<Z> type<T> value<type> option<I>): define a symbol
+#   getSymbol<Z>(container<Y>): get symbol
+#   getSymbol<Z>(container<ZT>): get symbol
+#   getType<T>(symbol<A>): get type of symbol
+#   getTypeE<T>(array<T>): get type of element of array 
+#   getTypeA<T>(element<T>): get type of array consisting of element
+#   getTypeF<T>(object<T>): get type of first element of object
+#   getTypeI<T>(id<I>): create type by id
+#   getTypeC<T>(content<'T>): create type by content
+#   idType<I>(content<T>): get id of type
+#   typeU<T>(content<'T>): create union type (T A)
+#   unionType<T>(union<A>): get type of union value
+#   unionValue<A>(union<A> type<T>): get union value
+#   alias<Z>(symbol<Z>): get an alias
+#   instI<I>(instruction<'I> arg<'A>): integer instruction
+#   instD<D>(instruction<'I> arg<'A>): float instruction
+#   instB<B>(instruction<'I> arg<'A>): bool instruction
+#   instX<X>(instruction<'I> arg<'A>): instruction without return value
+#   if<A>(then<A> condition<B> else<A>): if
+#   while<A>(before<'X> condition<B> do<'X> after<A>): while
+
+def(T getTypeI(1) getTypeI(1) 0)
+def(Z T getTypeI(0) 0)
+def(X T getTypeI(2) 0)
+def(A T getTypeI(3) 0)
+def(I T getTypeI(4) 0)
+def(D T getTypeI(5) 0)
+def(B T getTypeI(6) 0)
+def(R T getTypeI(7) 0)
+def(O T getTypeI(8) 0)
+
+def(FuncUnary T getTypeI(16) 0)
+def(FuncDef T getTypeI(17) 0)
+def(FuncLogic T getTypeI(18) 0)
+def(FuncEqu T getTypeI(19) 0)
+def(FuncAdd T getTypeI(20) 0)
+def(FuncMul T getTypeI(21) 0)
+def(FuncAt T getTypeI(22) 0)
+
+def(Y T getTypeC(Z) 0)
+def(ZT T getTypeC(Z T) 0)
+
+def('Z T getTypeA(Z) 0)
+def('T T getTypeA(T) 0)
+def('X T getTypeA(X) 0)
+def('A T getTypeA(A) 0)
+def('I T getTypeA(I) 0)
+def('D T getTypeA(D) 0)
+def('B T getTypeA(B) 0)
+def('R T getTypeA(R) 0)
+def('O T getTypeA(O) 0)
+def('Y T getTypeA(Y) 0)
+def('ZT T getTypeA(ZT) 0)
+
+def({@} FuncAt (symbol@Y type@T; (Y.getSymbol() T);))
+
+def({::=} FuncDef (symbol@ZT type@T arg@'ZT do@A; def(symbol type (arg do) 0);) 0)
+{:=}@X ::= (FuncDef, symbol@ZT arg@'ZT do@A; def(symbol FuncUnary (arg do) 0);)
+
+{@=}@X ::= (FuncDef, symbol@Y content@'T; def(symbol T getTypeC(content) 0);)
+{@*=}@X ::= (FuncDef, symbol@Y content@T; def(symbol T getTypeA(content) 0);)
+
+{=}@X ::= (FuncDef, symbol@ZT value@A; def(symbol.getSymbol() value.type() value 0);)
+{<-}@X ::= (FuncDef, symbol@ZT value@A; def(symbol.getSymbol() value.type() value 1);)
+{=<<}@X ::= (FuncDef, symbol@ZT value@A; def(symbol.getSymbol().alias() value.getType() value 0);)

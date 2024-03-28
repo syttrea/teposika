@@ -1,0 +1,9 @@
+code: loop.tpsk
+  - prefix: *
+    path: *
+    all: true
+  - prefix: *
+    path: def.yml
+    all: true
+export:
+  all: true

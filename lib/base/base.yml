@@ -1,0 +1,7 @@
+source:
+  - path: base.yml
+    all: true
+  - path: instruction.yml
+    all: true
+  - path: loop.yml
+    all: true
